@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnreaGHPages</title>
+
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+</head>
+<body>
+
+    <!-- menu fixo no topo -->
+    <div class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper red accent-4">
+                <!-- logotipo -->
+                <a href="/" class="center brand-logo">Anrea</a>    
+            </div>
+        </nav>
+    </div>
+
+    <br>
+    
+    <div class="container">
+
+        <div class="row">
+            <div class="col s12">
+                <h4 class="center">angular.json convertido, clique na seta verde para baixar o arquivo</h4>
+            </div>
+        </div>
+
+        <pre id='message'></pre>
+
+        <div class="row">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea id="textarea" name="textarea" class="materialize-textarea"><%= json %></textarea>
+                    </div>
+                </div>
+
+                <div class="fixed-action-btn">
+                    <button class="btn-floating btn-large green waves-effect waves-light" onclick="salvar()" name="action">
+                        <i class="material-icons right">arrow_downward</i>
+                    </button>
+                </div>
+        </div>
+
+    </div>
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/FileSaver.min.js"></script>
+
+    <script>
+        function salvar() {
+            let texto = document.getElementById("textarea").value;
+            let json = JSON.parse(texto)
+            let fileName = 'angular.json';
+            let fileToSave = new Blob([JSON.stringify(json, null, 4)], {
+                type: 'application/json',
+                name: fileName
+            });
+            window.saveAs(fileToSave, fileName);
+        }
+    </script>
+
+    <script>
+        document.getElementById("textarea").style.display = 'none';
+        let jsonObj = JSON.parse(document.getElementById("textarea").value)
+        var str = JSON.stringify(jsonObj, null, 2); // spacing level = 2
+        $('#message').html(str)
+    </script>
+</body>
+</html>
